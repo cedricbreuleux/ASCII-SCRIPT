@@ -1,17 +1,19 @@
 <?php
 require 'CloseNumber.php';
 require 'Class.php';
+require 'reshade.php';
 
 $jpegImageColor=new JPEGImageColor();
 
 
-$image_load = $argv[1];
+$image_load = reshade($cheminImage);
 $name_result = $argv[2];
 $info_image = getimagesize($image_load);
 $longueur=$info_image[0];
 $largeur=$info_image[1];
 
 if($longueur && $largeur && $name_result && $image_load) {
+
     $jpegImageColor->load($image_load);
     // recupere les nuances de gris et les stocks
     function get_shade($longueur, $largeur, $jpegImageColor){
