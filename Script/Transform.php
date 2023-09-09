@@ -55,6 +55,7 @@ if($longueur && $largeur && $name_result && $image_load) {
     $tab2 = trie($tab);
     // tableau de caractere
     $caract = array(
+        10 =>  " ",
         9 =>   " ",
         8 =>   " ",
         7 =>   ".",
