@@ -8,9 +8,9 @@ $jpegImageColor=new JPEGImageColor();
 
 
 $image_load = reshade($cheminImage);
-$name_result = $argv[2];
-$max_ligne_vertical =  intval($argv[3]);
-$max_caracteres = intval($argv[4]);
+$name_result = "temporaire";
+$max_ligne_vertical =  intval($argv[2]);
+$max_caracteres = intval($argv[3]);
 $info_image = getimagesize($image_load);
 $longueur=$info_image[0];
 $largeur=$info_image[1];

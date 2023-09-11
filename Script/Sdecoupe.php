@@ -1,6 +1,4 @@
 <?php
-//$chemin = $argv[1];
-//$ligne = $argv[2];
 function recupere_contenu($chemin){
     $html = file_get_contents($chemin);
     $contenu = explode("<", $html);
