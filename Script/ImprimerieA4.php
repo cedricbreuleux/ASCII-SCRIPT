@@ -2,12 +2,15 @@
 require 'CloseNumber.php';
 require 'Class.php';
 require 'reshade.php';
+require 'Pdecoupe.php';
 
 $jpegImageColor=new JPEGImageColor();
 
 
 $image_load = reshade($cheminImage);
 $name_result = $argv[2];
+$max_ligne_vertical =  intval($argv[3]);
+$max_caracteres = intval($argv[4]);
 $info_image = getimagesize($image_load);
 $longueur=$info_image[0];
 $largeur=$info_image[1];
@@ -119,33 +122,24 @@ if($longueur && $largeur && $name_result && $image_load) {
     function create_result($matrice, $cheminFichier, $longueur, $largeur) {
         $fichier = fopen("../ImageFinnal/".$cheminFichier, 'w');
 
-        fwrite($fichier, "<!DOCTYPE html>
-        <html lang='en'>
-        <head>
-            <meta charset='UTF-8'>
-            <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-            <title>Document</title>
-            <link rel='stylesheet' href='style.css'>
-        </head>
-        <body style=\"font-size: xx-small; line-height: 0%;\">
-            <pre>");
         // Boucle pour générer le contenu
+        $count = 0;
+        $satus = true;
         for ($x = 0; $x < $largeur; $x++) {
-            fwrite($fichier, "<p>");
+                fwrite($fichier, "<");
             for ($y = 0; $y < $longueur; $y++) {
-                $contenu = $matrice[$y][$x];
-                fwrite($fichier, $contenu);
+                $count++;
+                if($satus){
+                    $contenu = $matrice[$y][$x];
+                    fwrite($fichier, $contenu);
+                }
             }
-            fwrite($fichier, "</p>");
         }
-        fwrite($fichier, "</pre>
-        </body>
-        </html>");
         fclose($fichier);
     }
     create_result($matrice, $name_result.".html", $longueur, $largeur);
     echo "Resultat créé\n";
-
+    Pdecoute("../ImageFinnal/".$name_result.".html", $max_ligne_vertical, $max_caracteres);
 }
 else {
     echo "Argument(s) manquant ou erroné \n";
