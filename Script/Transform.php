@@ -5,7 +5,6 @@ require 'reshade.php';
 
 $jpegImageColor=new JPEGImageColor();
 
-
 $image_load = reshade($cheminImage);
 $name_result = $argv[2];
 $info_image = getimagesize($image_load);
@@ -127,7 +126,7 @@ if($longueur && $largeur && $name_result && $image_load) {
             <title>Document</title>
             <link rel='stylesheet' href='style.css'>
         </head>
-        <body style=\"font-size: xx-small; line-height: 0%;\">
+        <body style=\"font-size: xx-small; line-height: 0%; \">
             <pre>");
         // Boucle pour générer le contenu
         for ($x = 0; $x < $largeur; $x++) {
