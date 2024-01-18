@@ -115,8 +115,9 @@ if($longueur && $largeur && $name_result && $image_load) {
 
 
     // creer le rendu
-    function create_result($matrice, $cheminFichier, $longueur, $largeur) {
+    function create_result($matrice, $cheminFichier, $longueur, $largeur, $jpegImageColor, $cheminImage) {
         $fichier = fopen("../ImageFinnal/".$cheminFichier, 'w');
+        $image = imagecreatefromjpeg($cheminImage);
 
         fwrite($fichier, "<!DOCTYPE html>
         <html lang='en'>
@@ -126,13 +127,19 @@ if($longueur && $largeur && $name_result && $image_load) {
             <title>Document</title>
             <link rel='stylesheet' href='style.css'>
         </head>
-        <body style=\"font-size: xx-small; line-height: 0%; \">
+        <body style=\"font-family:monospace; line-height:0;font-size: 2px; letter-spacing: 0.8px;\">
             <pre>");
         // Boucle pour générer le contenu
         for ($x = 0; $x < $largeur; $x++) {
-            fwrite($fichier, "<p>");
+            fwrite($fichier, "<p");
             for ($y = 0; $y < $longueur; $y++) {
-                $contenu = $matrice[$y][$x];
+
+                $pixel = imagecolorat($image, $y, $x);
+                $rouge = ($pixel >> 16) & 0xFF;
+                $vert = ($pixel >> 8) & 0xFF;
+                $bleu = $pixel & 0xFF;
+
+                $contenu = "<span style=\"color: rgb(".$rouge.", ".$vert.", ".$bleu.");\">". $matrice[$y][$x]."</span>";
                 fwrite($fichier, $contenu);
             }
             fwrite($fichier, "</p>");
@@ -142,7 +149,8 @@ if($longueur && $largeur && $name_result && $image_load) {
         </html>");
         fclose($fichier);
     }
-    create_result($matrice, $name_result.".html", $longueur, $largeur);
+    echo $cheminImage;
+    create_result($matrice, $name_result.".html", $longueur, $largeur, $jpegImageColor, $cheminImage);
     echo "Resultat créé\n";
 
 }
