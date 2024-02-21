@@ -1,36 +1,9 @@
-pour impression:
-
-php ImprimerieA4.php "../ImageSources/lion.jpg" "106" "380"
 
 limage doit etre dans imasources en jpg
-106 est le nombre de ligne vertical
-380 est le nombre de caractere max horizontal
-
-
-pour l'image complete:
 
 php Transform.php "../ImageSources/lion.jpg" "virtuel"
-l'image doit etre dans ImageSources
-le deuxieme argument est le nom du fichier sorti
 
 
+wkhtmltoimage --quality 100  ./cece3.html cece1.svg
+wkhtmltopdf ./chien.html enfin.pdf
 
-
-
-pour un grand rendu et proportionelle:
-letter-spacing 3px
-
-pour un rendu plus compressé:
-/*
-<script>
-            const ligne = document.querySelectorAll("p");
-            let pixel = 0;
-            ligne.forEach(element => {
-                if(element !== ligne[0]) {
-                    pixel += 4;
-                    element.style.position = 'relative';
-                    element.style.bottom =  pixel+"px";
-                }
-            });
-</script>
-*/

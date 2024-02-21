@@ -65,7 +65,7 @@ if($longueur && $largeur && $name_result && $image_load) {
         3 =>   "x",
         2 =>   "X",
         1 =>   "@",
-        0 =>   "#",
+        0 =>   "b",
     );
 
 
@@ -127,11 +127,13 @@ if($longueur && $largeur && $name_result && $image_load) {
             <title>Document</title>
             <link rel='stylesheet' href='style.css'>
         </head>
-        <body style=\"font-family:monospace; line-height:0;font-size: 2px; letter-spacing: 0.8px;\">
+        <body style=\"line-height: 0;
+        font-size: 4px;
+        letter-spacing: 0.1rem;\">
             <pre>");
         // Boucle pour générer le contenu
         for ($x = 0; $x < $largeur; $x++) {
-            fwrite($fichier, "<p");
+            fwrite($fichier, "<p>");
             for ($y = 0; $y < $longueur; $y++) {
 
                 $pixel = imagecolorat($image, $y, $x);
@@ -153,6 +155,8 @@ if($longueur && $largeur && $name_result && $image_load) {
     create_result($matrice, $name_result.".html", $longueur, $largeur, $jpegImageColor, $cheminImage);
     echo "Resultat créé\n";
 
+    $command = "wkhtmltopdf ".$name_result.".html ".$name_result.".pdf";
+    $output = shell_exec($command);
 }
 else {
     echo "Argument(s) manquant ou erroné \n";
