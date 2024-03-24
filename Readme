@@ -1,9 +1,13 @@
+info:
+  limage doit etre dans imasources en jpg
+  Veuillez mettre une image avec 390px max de largeur
 
-limage doit etre dans imasources en jpg
-
+commande:
 php Transform.php "../ImageSources/lion.jpg" "virtuel"
 
 
-wkhtmltoimage --quality 100  ./cece3.html cece1.svg
-wkhtmltopdf ./chien.html enfin.pdf
+
+Notes:
+  wkhtmltoimage --quality 100  ./cece3.html cece1.svg
+  wkhtmltopdf ./chien.html enfin.pdf
 
